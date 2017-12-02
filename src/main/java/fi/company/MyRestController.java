@@ -87,7 +87,6 @@ public class MyRestController {
         blogEntry3.setDate(date.toString());
         database.save(blogEntry3);
     }
-
 }
 
 

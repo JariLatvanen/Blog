@@ -2,7 +2,7 @@
     'use strict'
     window.addEventListener('load',  buildPage)
 
-    var user = "viewer"
+    var user = "admin"
 
     /**
     * get user info from cookie and get blogpost data (json)
@@ -118,8 +118,7 @@
     document.getElementById("writer").value=json.writer ;
     document.getElementById("text").value=json.text ;
     })
-   //window.location.href = "http://localhost:8080/index";
-   showModform();
+    showModform();
 
     }
 

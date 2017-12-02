@@ -105,11 +105,8 @@
     */
 
     function modifyIt(e) {
-    console.log("modify" + e.target.id);
-
     let burl = 'http://localhost:8080/blogpost/' + e.target.id
             fetch(burl).then((response) => response.json()).then((json) => {
-    console.log(json);
     document.getElementById("modid").value=json.id ;
     document.getElementById("modid").style.display = "none";
     document.getElementById("header").value=json.header ;

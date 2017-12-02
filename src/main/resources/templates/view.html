@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My View</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content="A layout example that shows off a blog page with a list of posts."></meta>
+
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-"
+          crossorigin="anonymous"></link>
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-old-ie-min.css"></link>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css"></link>
+    <!--<![endif]-->
+
+
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css\blog-old-ie.css"></link>
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="css\blog.css"></link>
+    <!--<![endif]-->
+
+</head>
+<script src="js/myscript.js"></script>
+<body>
+
+<div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+            <h1 class="brand-title">A Sample Blog</h1>
+            <h2 class="brand-tagline">using Pure</h2>
+
+            <nav class="nav">
+                <ul id="formbtn" class="nav-list">
+                    <li class="nav-item">
+                        <a class="pure-button">New entry</a>
+                    </li>
+                </ul>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <div class="pure-menu pure-menu-horizontal">
+                            <ul class="pure-menu-list">
+                                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                                    <a href="#" id="menuLink1" class="pure-menu-link">User</a>
+                                    <ul class="pure-menu-children" style="background-color: rgb(61, 79, 93);">
+                                        <li class="pure-menu-item"><a id="admin" href="#"
+                                                                      class="pure-menu-link">Admin</a></li>
+                                        <li class="pure-menu-item"><a id="viewer" href="#"
+                                                                      class="pure-menu-link">Viewer</a></li>
+
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <body>
+    <div id="form" class="content pure-u-1 pure-u-md-3-4">
+        <form class="pure-form" action="http://localhost:8080/blogpost" method="post"
+              onsubmit="setTimeout(function () { window.location.reload(); }, 50)">
+            <p>New blog item <span id="result"></span></p>
+            <input class="pure-input-1-2" type="text" name="header" placeholder="header"></input><br></br>
+            <input class="pure-input-1-2" type="text" name="writer" placeholder="writer"></input><br></br>
+            <textarea name="text" rows="10" cols="60" placeholder="text"></textarea><br></br>
+            <button type="submit" class="pure-button-primary">Save</button>
+            <br></br>
+        </form>
+        <br></br>
+    </div>
+    </body>
+
+    <div class="content pure-u-1 pure-u-md-3-4">
+        <div>
+            <!-- A wrapper for all the blog posts -->
+            <div id="main" class="posts">
+                <h1 class="content-subhead"></h1>
+
+            </div>
+
+
+            <div class="footer">
+                <div class="pure-menu pure-menu-horizontal">
+                    <ul>
+                        <li class="pure-menu-item"><a href="http://purecss.io/" class="pure-menu-link">About Pure</a>
+                        </li>
+                        <li class="pure-menu-item"><a href="https://github.com/JariLatvanen/ploki/"
+                                                      class="pure-menu-link">GitHub source of this one</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

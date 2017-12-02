@@ -7,6 +7,7 @@ The source code and documentation is located at: https://github.com/JariLatvanen
 
 A runnable .jar is located at: https://github.com/JariLatvanen/blog/releases/myapp-0.1.0.jar
 
-Just download the jar and run it then use http://localhost:8080/index
-to run the application.
+Just download the jar and start it for example java -jar myapp-0.1.0.jar
+
+Then use http://localhost:8080/index from the browser to run the application.
 

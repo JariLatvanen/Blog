@@ -7,11 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
@@ -41,13 +38,6 @@ public class MyRestController {
     }
 
 
-    @RequestMapping(value = "/blogpost", method = RequestMethod.POST)
-    public String saveBlogEntry(BlogEntry b) {
-        Date date = new Date();
-        b.setDate(date.toString());
-        database.save(b);
-        return b.toString();
-    }
 
     @RequestMapping(value = "/blogpost/delete{id}", method = RequestMethod.DELETE)
     public @ResponseBody
@@ -62,15 +52,14 @@ public class MyRestController {
         return database.findOne(id);
     }
 
-    @RequestMapping(value = "/blogpost/update", method = RequestMethod.POST)
-    public String updateBlogEntry(BlogEntry b) {
+    @RequestMapping(value = "/blogpost", method = RequestMethod.POST)
+    public String saveBlogEntry(BlogEntry b) {
         System.out.println(b);
         Date date = new Date();
         b.setDate(date.toString());
         database.save(b);
-        return null;
+        return "view";
     }
-
 
     public void initDb() {
         BlogEntry blogEntry = new BlogEntry();
@@ -93,8 +82,8 @@ public class MyRestController {
         BlogEntry blogEntry3 = new BlogEntry();
         blogEntry3.setHeader("ToDo");
         blogEntry3.setWriter("Jari");
-        blogEntry3.setText("Add editing and commenting of blog entry. Add search capabilities and sorting." +
-                "Improve error handling. ");
+        blogEntry3.setText("Add commenting of blog entry. Add search capabilities and sorting." +
+                "Improve error handling.");
         blogEntry3.setDate(date.toString());
         database.save(blogEntry3);
     }

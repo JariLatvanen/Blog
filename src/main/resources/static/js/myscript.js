@@ -13,12 +13,14 @@
         var x = document.cookie;
         user = x.substring(5, x.length);
 
+        console.log("start");
         let burl = 'http://localhost:8080/blogpost'
         fetch(burl).then((response) => response.json()).then((json) => {
         })
     }
 
     function buildPage() {
+    console.log("build")
         let burl = 'http://localhost:8080/blogpost'
         fetch(burl).then((response) => response.json()).then((json) => {
             createRow(json);
@@ -32,49 +34,47 @@
 
     function createRow(json) {
         for (let item of json) {
-            let td1 = document.createElement('section')
-            td1.setAttribute('class', 'post')
-            td1.setAttribute('class', 'post-title')
-            td1.innerHTML = item.header;
+            let header = document.createElement('section')
+            header.setAttribute('class', 'post')
+            header.setAttribute('class', 'post-title')
+            header.innerHTML = item.header;
 
-            let td2 = document.createElement('a')
-            td2.setAttribute('class', 'post')
-            td2.setAttribute('class', 'post-writer')
-            td2.innerHTML = item.writer + "  ";
+            let writer = document.createElement('a')
+            writer.setAttribute('class', 'post')
+            writer.setAttribute('class', 'post-writer')
+            writer.innerHTML = item.writer + "  ";
 
-            let b = document.createElement('a')
-            b.setAttribute('class', 'delbtn')
-//            b.setAttribute('class', 'button')
-            b.setAttribute('class', 'pure-button-primary')
-            b.setAttribute('id', 'delete' + item.id)
-            b.innerHTML = "Delete  ";
+            let delb = document.createElement('a')
+            delb.setAttribute('class', 'delbtn')
+            delb.setAttribute('class', 'pure-button-primary')
+            delb.setAttribute('id', 'delete' + item.id)
+            delb.innerHTML = "Delete  ";
 
-            let b2 = document.createElement('a')
-            b2.setAttribute('class', 'modbtn')
-//            b2.setAttribute('class', 'button')
-            b2.setAttribute('class', 'pure-button-primary')
-            b2.setAttribute('id', 'get' + item.id)
-            b2.innerHTML = "Modify";
+            let modb = document.createElement('a')
+            modb.setAttribute('class', 'modbtn')
+            modb.setAttribute('class', 'pure-button-primary')
+            modb.setAttribute('id', 'get' + item.id)
+            modb.innerHTML = "Modify";
 
-            let td3 = document.createElement('p')
-            td3.setAttribute('class', 'post')
-            td3.setAttribute('class', 'post-description')
-            td3.innerHTML = item.text;
+            let text = document.createElement('p')
+            text.setAttribute('class', 'post')
+            text.setAttribute('class', 'post-description')
+            text.innerHTML = item.text;
 
-            let td4 = document.createElement('span')
-            td4.setAttribute('class', 'post')
-            td4.setAttribute('class', 'post-description')
-            td4.innerHTML = item.date + "   ";
+            let date = document.createElement('span')
+            date.setAttribute('class', 'post')
+            date.setAttribute('class', 'post-description')
+            date.innerHTML = item.date + "   ";
 
             let tr = document.getElementById('main')
-            tr.appendChild(td1)
-            tr.appendChild(td2)
-            tr.appendChild(td4)
+            tr.appendChild(header)
+            tr.appendChild(writer)
+            tr.appendChild(date)
             if (user == "admin") {
-                tr.appendChild(b)
-                tr.appendChild(b2)
+                tr.appendChild(delb)
+                tr.appendChild(modb)
             }
-            tr.appendChild(td3)
+            tr.appendChild(text)
 
             if (user == "viewer") {
                 document.getElementById("formbtn").style.visibility = "hidden"
@@ -118,7 +118,9 @@
     document.getElementById("writer").value=json.writer ;
     document.getElementById("text").value=json.text ;
     })
-    showModform();
+   //window.location.href = "http://localhost:8080/index";
+   showModform();
+
     }
 
 

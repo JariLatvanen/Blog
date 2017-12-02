@@ -5,7 +5,7 @@ This is assignment work for Frontend mestari class which I am attending.
 
 The source code and documentation is located at: https://github.com/JariLatvanen/blog
 
-A runnable .jar is located at: https://github.com/JariLatvanen/blog/releases/myapp-0.1.0.jar
+A runnable .jar is located at: https://github.com/JariLatvanen/blog/releases as myapp-0.1.0.jar
 
 Just download the jar and start it for example java -jar myapp-0.1.0.jar
 

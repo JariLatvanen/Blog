@@ -56,6 +56,22 @@ public class MyRestController {
         return null;
     }
 
+    @RequestMapping(value = "/blogpost/get{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    BlogEntry findOne(@PathVariable long id) {
+        return database.findOne(id);
+    }
+
+    @RequestMapping(value = "/blogpost/update", method = RequestMethod.POST)
+    public String updateBlogEntry(BlogEntry b) {
+        System.out.println(b);
+        Date date = new Date();
+        b.setDate(date.toString());
+        database.save(b);
+        return null;
+    }
+
+
     public void initDb() {
         BlogEntry blogEntry = new BlogEntry();
         blogEntry.setHeader("Homework for Frontend mestari class");

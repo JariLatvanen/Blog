@@ -1,6 +1,6 @@
 (function () {
     'use strict'
-    window.addEventListener('load', doIt)
+    window.addEventListener('load',  buildPage)
 
     var user = "viewer"
 
@@ -18,7 +18,7 @@
         })
     }
 
-    function doIt() {
+    function buildPage() {
         let burl = 'http://localhost:8080/blogpost'
         fetch(burl).then((response) => response.json()).then((json) => {
             createRow(json);
@@ -44,10 +44,17 @@
 
             let b = document.createElement('a')
             b.setAttribute('class', 'delbtn')
-            b.setAttribute('class', 'button')
+//            b.setAttribute('class', 'button')
             b.setAttribute('class', 'pure-button-primary')
             b.setAttribute('id', 'delete' + item.id)
-            b.innerHTML = "Delete";
+            b.innerHTML = "Delete  ";
+
+            let b2 = document.createElement('a')
+            b2.setAttribute('class', 'modbtn')
+//            b2.setAttribute('class', 'button')
+            b2.setAttribute('class', 'pure-button-primary')
+            b2.setAttribute('id', 'get' + item.id)
+            b2.innerHTML = "Modify";
 
             let td3 = document.createElement('p')
             td3.setAttribute('class', 'post')
@@ -65,6 +72,7 @@
             tr.appendChild(td4)
             if (user == "admin") {
                 tr.appendChild(b)
+                tr.appendChild(b2)
             }
             tr.appendChild(td3)
 
@@ -73,8 +81,10 @@
             } else {
                 document.getElementById("formbtn").style.visibility = "visible"
                 document.getElementById('delete' + item.id).addEventListener('click', deleteIt);
+                document.getElementById('get' + item.id).addEventListener('click', modifyIt);
             }
             document.getElementById("form").style.display = "none"
+            document.getElementById("modform").style.display = "none"
         }
     }
 
@@ -90,6 +100,28 @@
         window.location.href = "http://localhost:8080/index";
     }
 
+    /**
+    * modify blog entry
+    *
+    */
+
+    function modifyIt(e) {
+    console.log("modify" + e.target.id);
+
+    let burl = 'http://localhost:8080/blogpost/' + e.target.id
+            fetch(burl).then((response) => response.json()).then((json) => {
+    console.log(json);
+    document.getElementById("modid").value=json.id ;
+    document.getElementById("modid").style.display = "none";
+    document.getElementById("header").value=json.header ;
+
+    document.getElementById("writer").value=json.writer ;
+    document.getElementById("text").value=json.text ;
+    })
+    showModform();
+    }
+
+
    /**
     * change user: admin or viewer
     *
@@ -102,7 +134,14 @@
 
     function showForm() {
         document.getElementById("form").style.display = ""
+        document.getElementById("modform").style.display = "none"
     }
+
+    function showModform() {
+        document.getElementById("modform").style.display = ""
+        document.getElementById("form").style.display = "none"
+    }
+
     /**
     * add event listeners
     *

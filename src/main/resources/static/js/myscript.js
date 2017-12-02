@@ -1,8 +1,8 @@
 (function () {
     'use strict'
-    window.addEventListener('load',  buildPage)
+    window.addEventListener('load',  startView)
 
-    var user = "admin"
+    var user = "viewer"
 
     /**
     * get user info from cookie and get blogpost data (json)
@@ -12,11 +12,10 @@
     function startView() {
         var x = document.cookie;
         user = x.substring(5, x.length);
-
-        console.log("start");
-        let burl = 'http://localhost:8080/blogpost'
-        fetch(burl).then((response) => response.json()).then((json) => {
-        })
+        if (user == "") {
+        user = "viewer"
+        }
+        buildPage();
     }
 
     function buildPage() {
@@ -148,7 +147,7 @@
     *
     */
     window.addEventListener('load', (event) => {
-        startView()
+//        startView()
         document.getElementById('admin').addEventListener('click', userChange);
         document.getElementById('viewer').addEventListener('click', userChange);
         document.getElementById('formbtn').addEventListener('click', showForm);

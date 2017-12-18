@@ -82,11 +82,21 @@ public class MyRestController {
         BlogEntry blogEntry3 = new BlogEntry();
         blogEntry3.setHeader("ToDo");
         blogEntry3.setWriter("Jari");
-        blogEntry3.setText("Add commenting of blog entry. Add search capabilities and sorting." +
-                "Improve error handling.");
+        blogEntry3.setText("Add commenting of blog entry. Improve error handling.");
         blogEntry3.setDate(date.toString());
         database.save(blogEntry3);
+
+        BlogEntry blogEntry4 = new BlogEntry();
+        blogEntry4.setHeader("Free-text search added");
+        blogEntry4.setWriter("Jari");
+        blogEntry4.setText("Free-text search now available.");
+        blogEntry4.setDate(date.toString());
+        database.save(blogEntry4);
     }
+
+
 }
+
+
 
 

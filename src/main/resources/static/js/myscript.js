@@ -3,6 +3,7 @@
     window.addEventListener('load',  startView)
 
     var user = "viewer"
+    var posts=0;
 
     /**
     * get user info from cookie and get blogpost data (json)
@@ -33,7 +34,13 @@
 
     function createRow(json) {
         for (let item of json) {
-            let header = document.createElement('section')
+            posts++;
+            let section = document.createElement('section')
+            section.setAttribute('id', 'section' + item.id)
+
+
+            let header = document.createElement('header')
+            header.setAttribute('id', 'header' + item.id)
             header.setAttribute('class', 'post')
             header.setAttribute('class', 'post-title')
             header.innerHTML = item.header;
@@ -56,6 +63,7 @@
             modb.innerHTML = "Modify";
 
             let text = document.createElement('p')
+            text.setAttribute('id', 'post' + item.id)
             text.setAttribute('class', 'post')
             text.setAttribute('class', 'post-description')
             text.innerHTML = item.text;
@@ -66,14 +74,15 @@
             date.innerHTML = item.date + "   ";
 
             let tr = document.getElementById('main')
-            tr.appendChild(header)
-            tr.appendChild(writer)
-            tr.appendChild(date)
+            section=tr.appendChild(section)
+            section.appendChild(header)
+            section.appendChild(writer)
+            section.appendChild(date)
             if (user == "admin") {
                 tr.appendChild(delb)
                 tr.appendChild(modb)
             }
-            tr.appendChild(text)
+            section.appendChild(text)
 
             if (user == "viewer") {
                 document.getElementById("formbtn").style.visibility = "hidden"
@@ -85,6 +94,9 @@
             document.getElementById("form").style.display = "none"
             document.getElementById("modform").style.display = "none"
         }
+//        document.getElementById('searchtxt').addEventListener('onsearch', search);
+//        document.getElementById('search').addEventListener('click', search);
+
     }
 
     /**
@@ -139,15 +151,38 @@
         document.getElementById("form").style.display = "none"
     }
 
+ /**
+    * freetext search on header and blogtext
+    *
+    */
+   function search() {
+    var i=1;
+    var text='';
+    var searchtext=document.getElementById("searchtxt").value;
+
+    for (i=1; i <= posts; i++) {
+        text = document.getElementById("post"+i).innerHTML + document.getElementById("header"+i).innerHTML
+        document.getElementById("section"+i).style.display = "none"
+    if (text.indexOf(searchtext) !== -1) {
+        document.getElementById("section"+i).style.display = ""
+        }
+    }
+   }
     /**
     * add event listeners
     *
     */
     window.addEventListener('load', (event) => {
+
+//        console.log("window add event listener")
 //        startView()
         document.getElementById('admin').addEventListener('click', userChange);
         document.getElementById('viewer').addEventListener('click', userChange);
         document.getElementById('formbtn').addEventListener('click', showForm);
+
+        document.getElementById('searchtxt').addEventListener('keydown', search);
+//        document.getElementById('search').addEventListener('click', search);
+
     })
 
 }())

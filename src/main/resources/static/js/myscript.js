@@ -31,7 +31,7 @@
 
     function buildComments() {
     console.log("buildcomments")
-        let burl = 'http://localhost:8080/blogpost/comments1'
+        let burl = 'http://localhost:8080/blogpost/comments'
         fetch(burl).then((response) => response.json()).then((json) => {
         console.log(json)
         createCommentRow(json);
@@ -98,6 +98,7 @@
             if (user == "admin") {
                 section.appendChild(delb)
                 section.appendChild(modb)
+                hideCommentBtn(item.id)
             }
             section.appendChild(comb)
             section.appendChild(text)
@@ -187,9 +188,11 @@
                 document.getElementById("formbtn").style.visibility = "hidden"
             } else {
                 document.getElementById("formbtn").style.visibility = "visible"
-                document.getElementById('deletecom' + item.id).addEventListener('click', deleteIt);
-                document.getElementById('getcom' + item.id).addEventListener('click', modifyCom);
             }
+            document.getElementById('deletecom' + item.id).addEventListener('click', deleteIt);
+            document.getElementById('getcom' + item.id).addEventListener('click', modifyCom);
+
+
             document.getElementById("form").style.display = "none"
             document.getElementById("modform").style.display = "none"
             document.getElementById("comform").style.display = "none"
@@ -263,7 +266,7 @@
     document.getElementById("comid").value=json.id ;
     document.getElementById("comid").style.display = "none";
     document.getElementById("blogid").value=json.blogid ;
-    document.getElementById("comheader").value=json.header ;
+//    document.getElementById("comheader").value=json.header ;
 
     document.getElementById("comwriter").value=json.writer ;
     document.getElementById("comtext").value=json.text ;
@@ -274,16 +277,19 @@
 
 
    function commentIt(e) {
-/*    let burl = 'http://localhost:8080/blogpost/' + e.target.id
-            fetch(burl).then((response) => response.json()).then((json) => {
-            console.log("Comment"+e)
-    })*/
-
     document.getElementById("blogid").value=e.target.id.substring(7)
     document.getElementById("comid").disabled = "true"
-
     showComform();
+    }
 
+    function hideCommentBtn(id) {
+        let burl = 'http://localhost:8080/blogpost/comments/'+id
+        fetch(burl).then((response) => response.json()).then((json) => {
+        console.log(json.length)
+            if (json.length >0) {
+            document.getElementById('delete' + id).style.display = "none"
+            }
+        })
     }
 
    /**

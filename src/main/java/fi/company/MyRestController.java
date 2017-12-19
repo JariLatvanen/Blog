@@ -1,22 +1,15 @@
 package fi.company;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 
@@ -62,17 +55,15 @@ public class MyRestController {
 
     @RequestMapping(value = "/blogpost", method = RequestMethod.POST)
     public String saveBlogEntry(BlogEntry b) {
-        System.out.println(b);
         Date date = new Date();
         b.setDate(date.toString());
         database.save(b);
         return "view";
     }
 
+
     @RequestMapping(value = "/blogcomment", method = RequestMethod.POST)
     public String saveBlogComment(BlogComment c) {
-        System.out.println("blog comment");
-        System.out.println(c);
         Date date = new Date();
         c.setDate(date.toString());
         database2.save(c);
@@ -80,12 +71,20 @@ public class MyRestController {
     }
 
 
-    @RequestMapping(value = "/blogpost/comments{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/blogpost/comments", method = RequestMethod.GET)
     public @ResponseBody
-    Iterable<BlogComment> findComments(@PathVariable long id) {
-        System.out.println("get");
+    Iterable<BlogComment> findComments() {
+        System.out.println("getall");
         return database2.findAll();
     }
+
+    @RequestMapping(value = "/blogpost/comments/{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Iterable<BlogComment> findCommentsById(@PathVariable long id) {
+        System.out.println("getbyid");
+        return database2.findByBlogid(id);
+    }
+
 
     @RequestMapping(value = "/blogcomment/getcom{id}", method = RequestMethod.GET)
     public @ResponseBody
@@ -154,10 +153,8 @@ public class MyRestController {
         }};
 
         blogEntry4.setComments(comments);
-        System.out.println(blogEntry4);
-        //ei tallenna kommentteja
         database.save(blogEntry4);
-        database2.save(comments); //tallentaa
+        database2.save(comments);
     }
 
 

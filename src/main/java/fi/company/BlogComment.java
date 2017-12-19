@@ -3,13 +3,11 @@ package fi.company;
 import javax.persistence.*;
 
 @Entity
-//@Table(name = "blog_comment")
 public class BlogComment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
-//    @JoinColumn(name = "blog_entry_id")
     private BlogEntry blogEntry;
     private long blogid;
     private String header;

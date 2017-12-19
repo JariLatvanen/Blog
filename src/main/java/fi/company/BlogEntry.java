@@ -22,7 +22,6 @@ public class BlogEntry {
     public BlogEntry() {
     }
 
-    //comments puuttuu?
     public BlogEntry(String header, String text, String writer, String date) {
         this.header = header;
         this.text = text;
@@ -32,7 +31,7 @@ public class BlogEntry {
 
 
     public Set<BlogComment> getComments() {
-        System.out.println("get comments");
+        System.out.println("get comments (blogentry)");
         System.out.println(comments);
         return comments;
     }

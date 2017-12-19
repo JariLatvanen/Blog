@@ -15,5 +15,3 @@ ToDo:
 -improve error handling, improve code...
 
 ![alt text](https://github.com/JariLatvanen/blog/blob/master/src/main/resources/blog_image.png)
-
-https://github.com/JariLatvanen/blog/tree/master/src/main/resources

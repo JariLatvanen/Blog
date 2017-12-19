@@ -12,5 +12,5 @@ Just download the jar and start it for example: java -jar myapp-0.1.0.jar
 Then use http://localhost:8080/index from the browser to run the application.
 
 ToDo:
--improve error handling, add commenting feature,add serach capabilities...
+-improve error handling, improve code...
 

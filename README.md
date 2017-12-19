@@ -14,3 +14,6 @@ Then use http://localhost:8080/index from the browser to run the application.
 ToDo:
 -improve error handling, improve code...
 
+![alt text](https://github.com/JariLatvanen/blog/blob/master/src/main/blog_image.png)
+
+https://github.com/JariLatvanen/blog/tree/master/src/main/resources

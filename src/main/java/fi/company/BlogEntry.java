@@ -1,11 +1,11 @@
 package fi.company;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.xml.stream.events.Comment;
+import java.util.Set;
 
 @Entity
+//@Table(name = "blog_entry")
 public class BlogEntry {
 
     @Id
@@ -15,28 +15,32 @@ public class BlogEntry {
     private String text;
     private String writer;
     private String date;
+    @OneToMany(mappedBy = "blogEntry", cascade = CascadeType.ALL)
+    private Set<BlogComment> comments;
+
 
     public BlogEntry() {
     }
 
-    @Override
-    public String toString() {
-        return "BlogEntry{" +
-                "id=" + id +
-                ", header='" + header + '\'' +
-                ", text='" + text + '\'' +
-                ", writer='" + writer + '\'' +
-                ", date='" + date + '\'' +
-                '}';
-    }
-
-    public BlogEntry(long id, String header, String text, String writer, String date) {
-        this.id = id;
+    //comments puuttuu?
+    public BlogEntry(String header, String text, String writer, String date) {
         this.header = header;
         this.text = text;
         this.writer = writer;
         this.date = date;
     }
+
+
+    public Set<BlogComment> getComments() {
+        System.out.println("get comments");
+        System.out.println(comments);
+        return comments;
+    }
+
+    public void setComments(Set<BlogComment> comments) {
+        this.comments = comments;
+    }
+
 
     public String getDate() {
         return date;
@@ -77,4 +81,23 @@ public class BlogEntry {
     public void setWriter(String writer) {
         this.writer = writer;
     }
+
+    @Override
+    public String toString() {
+        String result ="BlogEntry" + "id=" + id +", header='" + header + "!";
+
+        if (comments != null) {
+            System.out.println("here");
+            System.out.println(comments.isEmpty());
+
+            for (BlogComment comment : comments) {
+                result += String.format(
+                        "Comment[id=%d, name='%s',text='%s']%n",
+                        comment.getId(), comment.getHeader(),comment.getText());
+            }
+        }
+
+        return result;
+    }
 }
+

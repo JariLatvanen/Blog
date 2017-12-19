@@ -33,6 +33,7 @@ h3 {
     margin: 3em auto;
 }
 
+
 .sidebar {
     background: rgb(61, 79, 93);
     color: #fff;
@@ -95,11 +96,25 @@ background-color: rgb(61, 79, 93);
 .post {
     padding-bottom: 2em;
 }
+
 .post-title {
     font-size: 2em;
+    margin-top: 0.2em;
+}
+.comm-title {
+    font-size: 1em;
     color: #222;
     margin-bottom: 0.2em;
 }
+
+.com-section {
+    font-size: 1em;
+    color: #222;
+    margin-bottom: 0.2em;
+    border-width:5px;
+    border-style:ridge;
+}
+
 .post-avatar {
     border-radius: 50px;
     float: right;

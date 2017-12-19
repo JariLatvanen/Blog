@@ -15,13 +15,21 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+
 
 @Controller
 
 public class MyRestController {
     @Autowired
     BlogRepository database;
+
+    @Autowired
+    CommentRepository database2;
+
 
     @Autowired
     private HttpServletRequest request;
@@ -61,6 +69,39 @@ public class MyRestController {
         return "view";
     }
 
+    @RequestMapping(value = "/blogcomment", method = RequestMethod.POST)
+    public String saveBlogComment(BlogComment c) {
+        System.out.println("blog comment");
+        System.out.println(c);
+        Date date = new Date();
+        c.setDate(date.toString());
+        database2.save(c);
+        return "view";
+    }
+
+
+    @RequestMapping(value = "/blogpost/comments{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    Iterable<BlogComment> findComments(@PathVariable long id) {
+        System.out.println("get");
+        return database2.findAll();
+    }
+
+    @RequestMapping(value = "/blogcomment/getcom{id}", method = RequestMethod.GET)
+    public @ResponseBody
+    BlogComment findComm(@PathVariable long id) {
+        return database2.findOne(id);
+    }
+
+
+    @RequestMapping(value = "/blogcomment/deletecom{id}", method = RequestMethod.DELETE)
+    public @ResponseBody
+    String delComment(@PathVariable long id) {
+        database2.delete(id);
+        return null;
+    }
+
+
     public void initDb() {
         BlogEntry blogEntry = new BlogEntry();
         blogEntry.setHeader("Homework for Frontend mestari class");
@@ -91,7 +132,32 @@ public class MyRestController {
         blogEntry4.setWriter("Jari");
         blogEntry4.setText("Free-text search now available.");
         blogEntry4.setDate(date.toString());
+
+        BlogComment blogComm = new BlogComment();
+        blogComm.setBlogid(4);
+        blogComm.setHeader("Blog comment added");
+        blogComm.setWriter("Jari");
+        blogComm.setText("Free-text search now available.");
+        blogComm.setDate(date.toString());
+
+        BlogComment blogComm2 = new BlogComment();
+        blogComm2.setBlogid(4);
+        blogComm2.setHeader("Blog comment #2 added");
+        blogComm2.setWriter("Jari");
+        blogComm2.setText("Comment for item #4");
+        blogComm2.setDate(date.toString());
+
+
+        Set comments = new HashSet<BlogComment>(){{
+            add(blogComm);
+            add(blogComm2);
+        }};
+
+        blogEntry4.setComments(comments);
+        System.out.println(blogEntry4);
+        //ei tallenna kommentteja
         database.save(blogEntry4);
+        database2.save(comments); //tallentaa
     }
 
 

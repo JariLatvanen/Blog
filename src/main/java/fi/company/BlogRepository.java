@@ -5,3 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 interface BlogRepository extends CrudRepository<BlogEntry, Long> {
 
 }
+
+interface CommentRepository extends CrudRepository<BlogComment, Long> {
+
+}
+

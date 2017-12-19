@@ -28,7 +28,6 @@
         })
     }
 
-
     function buildComments() {
     console.log("buildcomments")
         let burl = 'http://localhost:8080/blogpost/comments'
@@ -48,7 +47,6 @@
             posts++;
             let section = document.createElement('section')
             section.setAttribute('id', 'section' + item.id)
-
 
             let header = document.createElement('header')
             header.setAttribute('id', 'header' + item.id)
@@ -89,7 +87,6 @@
             let h = document.createElement('h1')
             h.setAttribute('class', 'content-subhead')
 
-
             let tr = document.getElementById('main')
             section=tr.appendChild(section)
             section.appendChild(header)
@@ -119,8 +116,6 @@
             document.getElementById("comform").style.display = "none"
 
         }
-//        document.getElementById('searchtxt').addEventListener('onsearch', search);
-//        document.getElementById('search').addEventListener('click', search);
           buildComments();
     }
 
@@ -200,7 +195,6 @@
         }
     }
 
-
     function deleteIt(e) {
         var url=''
         var secid=0;
@@ -266,7 +260,6 @@
     document.getElementById("comid").value=json.id ;
     document.getElementById("comid").style.display = "none";
     document.getElementById("blogid").value=json.blogid ;
-//    document.getElementById("comheader").value=json.header ;
 
     document.getElementById("comwriter").value=json.writer ;
     document.getElementById("comtext").value=json.text ;
@@ -348,15 +341,10 @@
     */
     window.addEventListener('load', (event) => {
 
-//        console.log("window add event listener")
-//        startView()
         document.getElementById('admin').addEventListener('click', userChange);
         document.getElementById('viewer').addEventListener('click', userChange);
         document.getElementById('formbtn').addEventListener('click', showForm);
-
         document.getElementById('searchtxt').addEventListener('keydown', search);
-//        document.getElementById('search').addEventListener('click', search);
-
     })
 
 }())

@@ -5,7 +5,6 @@ import javax.xml.stream.events.Comment;
 import java.util.Set;
 
 @Entity
-//@Table(name = "blog_entry")
 public class BlogEntry {
 
     @Id

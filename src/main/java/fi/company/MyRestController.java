@@ -38,8 +38,6 @@ public class MyRestController {
         return database.findAll();
     }
 
-
-
     @RequestMapping(value = "/blogpost/delete{id}", method = RequestMethod.DELETE)
     public @ResponseBody
     String delEntry(@PathVariable long id) {

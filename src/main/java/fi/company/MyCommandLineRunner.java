@@ -12,7 +12,7 @@ public class MyCommandLineRunner implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        System.out.println( hp.createH1("hello") );
+        System.out.println( hp.createH1("Up and running") );
 
 
     }
